@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "articles",
+  "info": {
+    "name": "article"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "text": {
+      "type": "richtext"
+    },
+    "owner": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "articles"
+    }
+  }
+}
