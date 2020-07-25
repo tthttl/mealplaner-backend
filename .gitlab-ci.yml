@@ -17,7 +17,7 @@ deploy:
     # Append keyscan output into known hosts
     - ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
-    - rsync -r --exclude=".*" $CI_PROJECT_DIR/mealplaner-backend $SERVER_USER@$SERVER_IP:/var/www/api --delete
+    - rsync -r --exclude=".*" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:/var/www/api --delete
     - ssh -tt $SERVER_USER@$SERVER_IP
     - cd /var/www/api
     - npm install
