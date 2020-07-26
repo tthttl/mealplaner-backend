@@ -53,9 +53,9 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "articles": {
-      "via": "owner",
-      "collection": "article"
+    "menus": {
+      "via": "user",
+      "collection": "menu"
     }
   }
 }

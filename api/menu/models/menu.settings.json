@@ -1,28 +1,27 @@
 {
   "kind": "collectionType",
-  "collectionName": "articles",
+  "collectionName": "menus",
   "info": {
-    "name": "article"
+    "name": "menu"
   },
   "options": {
     "increments": true,
     "timestamps": true
   },
   "attributes": {
-    "title": {
+    "name": {
       "type": "string"
     },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
+    "ingredients": {
+      "type": "json"
     },
-    "text": {
-      "type": "richtext"
+    "link": {
+      "type": "string"
     },
-    "owner": {
+    "user": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "articles"
+      "via": "menus"
     }
   }
 }
