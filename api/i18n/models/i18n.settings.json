@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "i18n",
+  "info": {
+    "name": "i18n"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "translations": {
+      "type": "json"
+    },
+    "lang": {
+      "type": "uid"
+    }
+  }
+}

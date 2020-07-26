@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/i18n",
+      "handler": "i18n.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/i18n/:id",
+      "handler": "i18n.findOne",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
