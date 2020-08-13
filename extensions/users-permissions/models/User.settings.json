@@ -54,7 +54,11 @@
       "configurable": false
     },
     "cookbooks": {
-      "via": "users",
+      "via": "owner",
+      "collection": "cookbook"
+    },
+    "sharedCookbooks": {
+      "via": "sharedWith",
       "collection": "cookbook"
     }
   }

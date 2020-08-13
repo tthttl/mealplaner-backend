@@ -6,16 +6,22 @@
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": false
   },
   "attributes": {
     "title": {
       "type": "string"
     },
-    "users": {
+    "owner": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "cookbooks",
+      "private": true
+    },
+    "sharedWith": {
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "cookbooks",
+      "via": "sharedCookbooks",
       "dominant": true,
       "private": true
     }
