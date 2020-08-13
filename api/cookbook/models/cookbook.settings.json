@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cookbooks",
+  "info": {
+    "name": "cookbook"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "cookbooks",
+      "dominant": true,
+      "private": true
+    }
+  }
+}
