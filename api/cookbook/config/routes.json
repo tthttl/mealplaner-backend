@@ -37,7 +37,7 @@
       "path": "/cookbooks/:id",
       "handler": "cookbook.delete",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfCookbook"]
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfCookbook", "isNotOnlyRemainingCookbookOfOwner"]
       }
     }
   ]
