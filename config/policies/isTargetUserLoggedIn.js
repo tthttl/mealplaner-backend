@@ -2,7 +2,7 @@ module.exports = async (ctx, next) => {
   const targetUserId = ctx.request.query.user;
 
   if(!targetUserId) {
-    return ctx.unauthorized("Specify a target user equal to your own id ?user=${user.id} or ?sharedWith=${user.id}")
+    return ctx.unauthorized("Specify a target user equal to your own id ?user=${user.id}")
   }
 
   const loggedInUser = ctx.state.user.id;
