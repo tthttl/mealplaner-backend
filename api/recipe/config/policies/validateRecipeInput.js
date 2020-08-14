@@ -1,7 +1,7 @@
 module.exports = async (ctx, next) => {
 
   if (ctx.is('multipart')) {
-    ctx.throw(400, "Only make JSON requests")
+    ctx.throw(400, "Make only  JSON requests")
   }
 
   if (!ctx.request.body.title) {
