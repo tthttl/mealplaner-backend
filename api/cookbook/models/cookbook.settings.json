@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cookbooks",
+  "info": {
+    "name": "cookbook"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": false
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "owner": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "cookbooks",
+      "private": true
+    },
+    "sharedWith": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "sharedCookbooks",
+      "dominant": true,
+      "private": true
+    }
+  }
+}
