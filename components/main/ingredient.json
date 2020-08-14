@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_main_ingredients",
+  "info": {
+    "name": "ingredient",
+    "icon": "apple-alt"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "decimal"
+    },
+    "unit": {
+      "type": "enumeration",
+      "enum": [
+        "kg",
+        "g",
+        "tableSpoon",
+        "coffeeSpoon",
+        "l",
+        "dl",
+        "ml",
+        "pinch",
+        "piece"
+      ]
+    },
+    "isStapleFood": {
+      "type": "boolean"
+    }
+  }
+}
