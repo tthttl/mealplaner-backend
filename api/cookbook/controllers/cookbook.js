@@ -6,6 +6,10 @@
  */
 const {sanitizeEntity} = require('strapi-utils');
 
+const sanitizeCookbook = ({id, title}) => {
+  return sanitizeEntity({id, title}, {model: strapi.models.recipe})
+}
+
 module.exports = {
   async find(ctx) {
 
@@ -17,20 +21,19 @@ module.exports = {
    const entities = await Promise.all([entitiesOwner, entitiesShared])
 
     return [...entities[0], ...entities[1]]
-      .map(entity => sanitizeEntity(entity, {model: strapi.models.cookbook}))
-      .map(({id, title}) => ({id, title}));
+      .map(entity => sanitizeCookbook(entity))
   },
   async findOne(ctx) {
-    const {id, title} = await strapi.services.cookbook.findOne({id: ctx.params.id});
-    return sanitizeEntity({id, title}, {model: strapi.models.cookbook});
+    const entity = await strapi.services.cookbook.findOne({id: ctx.params.id});
+    return sanitizeCookbook(entity);
   },
   async create(ctx) {
-    const {id, title} = await strapi.services.cookbook.create({...ctx.request.body, owner: ctx.state.user, sharedWith: []});
-    return sanitizeEntity({id, title}, {model: strapi.models.cookbook});
+    const entity = await strapi.services.cookbook.create({...ctx.request.body, owner: ctx.state.user, sharedWith: []});
+    return sanitizeCookbook(entity);
   },
   async update(ctx) {
-    const {id, title} = await strapi.services.cookbook.update({ id:  ctx.params.id }, {...ctx.request.body, owner: ctx.state.user});
-    return sanitizeEntity({id, title} , { model: strapi.models.cookbook });
+    const entity = await strapi.services.cookbook.update({ id:  ctx.params.id }, {...ctx.request.body, owner: ctx.state.user});
+    return sanitizeCookbook(entity);
   },
   async delete(ctx) {
     await strapi.services.cookbook.delete({ id: ctx.params.id });
