@@ -12,8 +12,6 @@ module.exports = async (ctx, next) => {
     await strapi.services.cookbook.findOne({id: recipe.cookbook.id, owner: currentUser})
     || await strapi.services.cookbook.findOne({id: recipe.cookbook.id, sharedWith: ctx.state.user})
 
-  console.log(cookbook);
-
   if(!cookbook) {
     return ctx.notFound("Not Found")
   }
