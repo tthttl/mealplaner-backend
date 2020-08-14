@@ -8,15 +8,15 @@ const {sanitizeEntity} = require('strapi-utils');
 
 module.exports = {
   async find(ctx) {
-    let entities;
-    const {user} = ctx.state;
 
-    if (ctx.query._q) {
-      entities = await strapi.services.cookbook.search({...ctx.query});
-    } else {
-      entities = await strapi.services.cookbook.find({...ctx.query});
-    }
-    return entities
+    const user = ctx.query.user;
+    delete ctx.query.user;
+
+   const entitiesOwner = strapi.services.cookbook.find({...ctx.query, owner: user});
+   const entitiesShared = strapi.services.cookbook.find({...ctx.query, sharedWith: user});
+   const entities = await Promise.all([entitiesOwner, entitiesShared])
+
+    return [...entities[0], ...entities[1]]
       .map(entity => sanitizeEntity(entity, {model: strapi.models.cookbook}))
       .map(({id, title}) => ({id, title}));
   },
