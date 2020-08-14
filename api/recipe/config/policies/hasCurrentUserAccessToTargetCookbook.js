@@ -12,7 +12,7 @@ module.exports = async (ctx, next) => {
   const targetCookbook = await strapi.services.cookbook.findOne({id: targetCookBookId});
 
   if(!targetCookbook) {
-    ctx.throw(404, 'Not Found');
+    ctx.send([]);
   }
 
   return [targetCookbook.owner, ...targetCookbook.sharedWith].some(allowedUser => strapi.config.functions.userHelpers.match(allowedUser, ctx.state.user)) ?
