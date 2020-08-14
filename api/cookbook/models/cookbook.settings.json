@@ -15,15 +15,17 @@
     "owner": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "cookbooks",
-      "private": true
+      "via": "cookbooks"
     },
     "sharedWith": {
       "plugin": "users-permissions",
       "collection": "user",
       "via": "sharedCookbooks",
-      "dominant": true,
-      "private": true
+      "dominant": true
+    },
+    "recipes": {
+      "collection": "recipe",
+      "via": "cookbook"
     }
   }
 }
