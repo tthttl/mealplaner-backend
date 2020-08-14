@@ -25,33 +25,11 @@ module.exports = {
     return sanitizeEntity({id, title}, {model: strapi.models.cookbook});
   },
   async create(ctx) {
-    if (ctx.is('multipart')) {
-      ctx.throw(400, "Only make JSON requests")
-    }
-
-    if (ctx.request.body.owner) {
-      ctx.throw(403, "Don't specify the owner");
-    }
-
-    if (!ctx.request.body.title) {
-      ctx.throw(400, "Please provide a title");
-    }
-
     const {id, title} = await strapi.services.cookbook.create({...ctx.request.body, owner: ctx.state.user, sharedWith: []});
-
     return sanitizeEntity({id, title}, {model: strapi.models.cookbook});
   },
   async update(ctx) {
-    if (ctx.request.body.owner) {
-      ctx.throw(403, "Don't overwrite the Owner");
-    }
-
-    if (ctx.is('multipart')) {
-      ctx.throw(400, "Only make JSON requests");
-    }
-
     const {id, title} = await strapi.services.cookbook.update({ id:  ctx.params.id }, {...ctx.request.body, owner: ctx.state.user});
-
     return sanitizeEntity({id, title} , { model: strapi.models.cookbook });
   },
   async delete(ctx) {
