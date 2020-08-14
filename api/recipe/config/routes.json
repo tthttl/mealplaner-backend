@@ -13,7 +13,7 @@
       "path": "/recipes/:id",
       "handler": "recipe.findOne",
       "config": {
-        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToCookbook"]
+        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToRecipesCookbook"]
       }
     },
     {
@@ -29,7 +29,7 @@
       "path": "/recipes/:id",
       "handler": "recipe.update",
       "config": {
-        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToCookbook", "validateRecipeInput"]
+        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToRecipesCookbook", "validateRecipeInput"]
       }
     },
     {
@@ -37,7 +37,7 @@
       "path": "/recipes/:id",
       "handler": "recipe.delete",
       "config": {
-        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToCookbook"]
+        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToRecipesCookbook"]
       }
     }
   ]
