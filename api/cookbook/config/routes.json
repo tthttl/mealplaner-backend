@@ -21,7 +21,7 @@
       "path": "/cookbooks",
       "handler": "cookbook.create",
       "config": {
-        "policies": ["global::isAuthenticated"]
+        "policies": ["global::isAuthenticated", "validateCookbook"]
       }
     },
     {
@@ -29,7 +29,7 @@
       "path": "/cookbooks/:id",
       "handler": "cookbook.update",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfCookbook"]
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfCookbook", "validateCookbook"]
       }
     },
     {
