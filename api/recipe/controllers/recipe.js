@@ -6,6 +6,14 @@
  */
 const {sanitizeEntity} = require('strapi-utils');
 
+const sanitizeRecipe = ({id, title, url, ingredients}) => {
+  return sanitizeEntity({
+    id,
+    title,
+    url,
+    ingredients: ingredients.map(({id, unit, amount, title}) => ({id, unit, amount, title}))
+  }, {model: strapi.models.recipe})
+}
 
 module.exports = {
   async find(ctx) {
@@ -17,14 +25,22 @@ module.exports = {
       entities = await strapi.services.recipe.find({...ctx.query});
     }
     return entities
-      .map(entity => sanitizeEntity(entity, {model: strapi.models.recipe}))
-      .map(({id, title, url, ingredients}) => {
-        return {id, title, url, ingredients: ingredients.map(({id, unit, amount, title}) => ({id, unit, amount, title}))}
-      });
+      .map(entity => sanitizeRecipe(entity))
+  },
+  async findOne(ctx) {
+    const entity = await strapi.services.recipe.findOne({ id: ctx.params.id });
+    return sanitizeRecipe(entity);
   },
   async create(ctx) {
-    const {id, title, url, ingredients} = await strapi.services.recipe.create({...ctx.request.body});
-
-    return sanitizeEntity({id, title, url,  ingredients: ingredients.map(({id, unit, amount, title}) => ({id, unit, amount, title}))}, {model: strapi.models.recipe});
+    const entity = await strapi.services.recipe.create({...ctx.request.body});
+    return sanitizeRecipe(entity);
+  },
+  async update(ctx) {
+    const  entity = await strapi.services.recipe.update({ id: ctx.params.id }, ctx.request.body);
+    return sanitizeRecipe(entity);
+  },
+  async delete(ctx) {
+    await strapi.services.recipe.delete({ id: ctx.params.id });
+    return 'DELETED';
   },
 };
