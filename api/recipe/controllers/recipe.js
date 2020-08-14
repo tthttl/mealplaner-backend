@@ -9,9 +9,6 @@ const {sanitizeEntity} = require('strapi-utils');
 
 module.exports = {
   async find(ctx) {
-    if(ctx.request.query.cookbook.length === 0) {
-      return [];
-    }
     let entities;
 
     if (ctx.query._q) {

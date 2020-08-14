@@ -1,15 +1,21 @@
 module.exports = async (ctx, next) => {
-  if(!ctx.request.query.cookbook) {
+  const targetCookBookId = ctx.request.query.cookbook
+
+  if(!targetCookBookId) {
     return ctx.unauthorized("Specify a target cookbook ?cookbook=${user.id}")
   }
 
-  const targetCookbookIds = ctx.request.query.cookbook && Array.isArray(ctx.request.query.cookbook) ? [...ctx.request.query.cookbook] : [ctx.request.query.cookbook]
+  if(Array.isArray(targetCookBookId)) {
+    return ctx.unauthorized("Specify only one target cookbook at the time")
+  }
 
-  const targetCookbooks = await Promise.all(targetCookbookIds.map(async (targetCookbookId) => await strapi.services.cookbook.findOne({id: targetCookbookId})));
-  const accessibleCookbooks = targetCookbooks.filter(cookbook =>  cookbook && [cookbook.owner, ...cookbook.sharedWith].some(allowedUser => strapi.config.functions.userHelpers.match(allowedUser, ctx.state.user)));
+  const targetCookbook = await strapi.services.cookbook.findOne({id: targetCookBookId});
 
-  ctx.request.query.cookbook = accessibleCookbooks.map(cookbook => cookbook.id);
+  if(!targetCookbook) {
+    ctx.throw(404, 'Not Found');
+  }
 
-  return next();
+  return [targetCookbook.owner, ...targetCookbook.sharedWith].some(allowedUser => strapi.config.functions.userHelpers.match(allowedUser, ctx.state.user)) ?
+    next() : ctx.send([]);
 }
 
