@@ -51,7 +51,8 @@
       "model": "role",
       "via": "users",
       "plugin": "users-permissions",
-      "configurable": false
+      "configurable": false,
+      "private": true
     },
     "cookbooks": {
       "via": "owner",

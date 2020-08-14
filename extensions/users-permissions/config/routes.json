@@ -1,0 +1,74 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/users",
+      "handler": "User.find",
+      "config": {
+        "policies": ["global::alwaysFail"],
+        "prefix": "",
+        "description": "Retrieve all user documents",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "find"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/users",
+      "handler": "User.create",
+      "config": {
+        "policies": ["global::alwaysFail"],
+        "prefix": ""
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/users/me",
+      "handler": "User.me",
+      "config": {
+        "policies": [],
+        "prefix": "",
+        "description": "Retrieve the logged in user information",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "findOne"
+        }
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/users/:id",
+      "handler": "User.update",
+      "config": {
+        "policies": ["global::alwaysFail"],
+        "prefix": "",
+        "description": "Update an existing user",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "update"
+        }
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/users/:id",
+      "handler": "User.destroy",
+      "config": {
+        "policies": ["global::alwaysFail"],
+        "prefix": "",
+        "description": "Delete an existing user",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User",
+          "actionType": "destroy"
+        }
+      }
+    }
+  ]
+}
+
