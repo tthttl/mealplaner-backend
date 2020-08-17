@@ -5,15 +5,7 @@
       "path": "/shoppinglists",
       "handler": "shoppinglist.find",
       "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/shoppinglists/count",
-      "handler": "shoppinglist.count",
-      "config": {
-        "policies": []
+        "policies": ["global::isAuthenticated", "global::isTargetUserLoggedIn"]
       }
     },
     {
@@ -21,7 +13,7 @@
       "path": "/shoppinglists/:id",
       "handler": "shoppinglist.findOne",
       "config": {
-        "policies": []
+        "policies": ["global::isAuthenticated", "isCurrentUserAllowedToAccessShoppinglist"]
       }
     },
     {
@@ -29,7 +21,7 @@
       "path": "/shoppinglists",
       "handler": "shoppinglist.create",
       "config": {
-        "policies": []
+        "policies": ["global::isAuthenticated", "validateShoppingList"]
       }
     },
     {
@@ -37,7 +29,7 @@
       "path": "/shoppinglists/:id",
       "handler": "shoppinglist.update",
       "config": {
-        "policies": []
+        "policies": ["global::isAuthenticated", "validateShoppingList"]
       }
     },
     {
@@ -45,7 +37,7 @@
       "path": "/shoppinglists/:id",
       "handler": "shoppinglist.delete",
       "config": {
-        "policies": []
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "isNotOnlyRemainingShoppingListOfOwner"]
       }
     }
   ]
