@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/shoppinglists",
+      "handler": "shoppinglist.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/shoppinglists/count",
+      "handler": "shoppinglist.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/shoppinglists/:id",
+      "handler": "shoppinglist.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/shoppinglists",
+      "handler": "shoppinglist.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/shoppinglists/:id",
+      "handler": "shoppinglist.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/shoppinglists/:id",
+      "handler": "shoppinglist.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
