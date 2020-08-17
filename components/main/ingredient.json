@@ -23,7 +23,11 @@
         "dl",
         "ml",
         "pinch",
-        "piece"
+        "piece",
+        "slice",
+        "cup",
+        "pack",
+        "bunch"
       ]
     },
     "isStapleFood": {
