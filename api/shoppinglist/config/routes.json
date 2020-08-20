@@ -1,0 +1,44 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/shoppinglists",
+      "handler": "shoppinglist.find",
+      "config": {
+        "policies": ["global::isAuthenticated", "global::isTargetUserLoggedIn"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/shoppinglists/:id",
+      "handler": "shoppinglist.findOne",
+      "config": {
+        "policies": ["global::isAuthenticated", "isCurrentUserAllowedToAccessShoppinglist"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/shoppinglists",
+      "handler": "shoppinglist.create",
+      "config": {
+        "policies": ["global::isAuthenticated", "validateShoppingList"]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/shoppinglists/:id",
+      "handler": "shoppinglist.update",
+      "config": {
+        "policies": ["global::isAuthenticated", "validateShoppingList"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/shoppinglists/:id",
+      "handler": "shoppinglist.delete",
+      "config": {
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "isNotOnlyRemainingShoppingListOfOwner"]
+      }
+    }
+  ]
+}

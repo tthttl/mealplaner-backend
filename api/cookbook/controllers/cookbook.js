@@ -7,7 +7,7 @@
 const {sanitizeEntity} = require('strapi-utils');
 
 const sanitizeCookbook = ({id, title}) => {
-  return sanitizeEntity({id, title}, {model: strapi.models.recipe})
+  return sanitizeEntity({id, title}, {model: strapi.models.cookbook})
 }
 
 module.exports = {

@@ -61,6 +61,14 @@
     "sharedCookbooks": {
       "via": "sharedWith",
       "collection": "cookbook"
+    },
+    "shoppinglists": {
+      "via": "owner",
+      "collection": "shoppinglist"
+    },
+    "sharedShoppinglists": {
+      "via": "sharedWith",
+      "collection": "shoppinglist"
     }
   }
 }

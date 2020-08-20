@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shoppinglists",
+  "info": {
+    "name": "shoppinglist"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "owner": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "shoppinglists"
+    },
+    "sharedWith": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "sharedShoppinglists",
+      "dominant": true
+    }
+  }
+}
