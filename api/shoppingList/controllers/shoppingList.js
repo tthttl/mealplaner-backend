@@ -22,8 +22,6 @@ module.exports = {
     const sharedShoppingListsPromise = strapi.services.shoppinglist.find({...ctx.query, sharedWith: user});
     const [ownShoppingLists, sharedShoppingLists] = await Promise.all([ownShoppingListsPromise, sharedShoppingListsPromise])
 
-    console.log(ownShoppingLists);
-
     return [...ownShoppingLists, ...sharedShoppingLists]
       .map(entity => sanitizeShoppingList(entity))
   },
