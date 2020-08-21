@@ -37,7 +37,7 @@
       "path": "/shoppinglists/:id",
       "handler": "shoppinglist.delete",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "isNotOnlyRemainingShoppingListOfOwner"]
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "isNotLastShoppingListOfOwner"]
       }
     }
   ]
