@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "shopping_list_items",
+  "info": {
+    "name": "shoppingListItem"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "amount": {
+      "type": "decimal"
+    },
+    "unit": {
+      "type": "enumeration",
+      "enum": [
+        "kg",
+        "g",
+        "tableSpoon",
+        "coffeeSpoon",
+        "l",
+        "dl",
+        "ml",
+        "pinch",
+        "piece",
+        "slice",
+        "cup",
+        "pack",
+        "bunch"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "shoppinglist": {
+      "model": "shoppinglist",
+      "via": "shoppingListItems"
+    }
+  }
+}
