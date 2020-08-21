@@ -13,18 +13,18 @@
       "type": "string"
     },
     "shoppingListItems": {
-      "via": "shoppingList",
-      "collection": "shopping-list-item"
+      "collection": "shopping-list-item",
+      "via": "shoppingList"
     },
     "owner": {
-      "via": "shoppingLists",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "shoppingLists"
     },
     "sharedWith": {
-      "via": "sharedShoppingLists",
       "plugin": "users-permissions",
       "collection": "user",
+      "via": "sharedShoppingLists",
       "dominant": true
     }
   }

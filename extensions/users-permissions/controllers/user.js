@@ -13,6 +13,8 @@ module.exports = {
       return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
     }
 
+    console.log(user);
+
     ctx.body = sanitizeUser(user);
   },
 }

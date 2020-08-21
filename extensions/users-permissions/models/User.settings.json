@@ -63,12 +63,12 @@
       "via": "sharedWith"
     },
     "shoppingLists": {
-      "collection": "shoppinglist",
-      "via": "owner"
+      "via": "owner",
+      "collection": "shoppinglist"
     },
     "sharedShoppingLists": {
-      "collection": "shoppinglist",
-      "via": "sharedWith"
+      "via": "sharedWith",
+      "collection": "shoppinglist"
     }
   }
 }

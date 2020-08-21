@@ -1,5 +1,4 @@
 module.exports = async (ctx, next) => {
-  console.log('here');
   const currentUser = ctx.state.user;
   const shoppingListItemId = ctx.params.id;
 
@@ -10,8 +9,8 @@ module.exports = async (ctx, next) => {
   }
 
   const shoppingList =
-    await strapi.services.shoppinglist.findOne({id: shoppingListItem.shoppinglist.id, owner: currentUser})
-    || await strapi.services.shoppinglist.findOne({id: shoppingListItem.shoppinglist.id, sharedWith: currentUser})
+    await strapi.services.shoppinglist.findOne({id: shoppingListItem.shoppingList.id, owner: currentUser})
+    || await strapi.services.shoppinglist.findOne({id: shoppingListItem.shoppingList.id, sharedWith: currentUser})
 
   if(!shoppingList) {
     return ctx.notFound("Not Found")

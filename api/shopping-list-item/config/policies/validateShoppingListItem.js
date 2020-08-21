@@ -9,7 +9,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (!ctx.request.body.shoppingList) {
-    ctx.throw(400, "Please provide a shoppingList");
+    ctx.throw(400, "Please provide a shopping list");
   }
 
   if (!ctx.request.body.amount) {
@@ -25,11 +25,11 @@ module.exports = async (ctx, next) => {
   }
 
   const shoppingList =
-    await strapi.services.shoppinglist.findOne({id: ctx.request.body.shoppinglist, owner: ctx.state.user})
-    || await strapi.services.shoppinglist.findOne({id: ctx.request.body.shoppinglist, sharedWith: ctx.state.user})
+    await strapi.services.shoppinglist.findOne({id: ctx.request.body.shoppingList, owner: ctx.state.user})
+    || await strapi.services.shoppinglist.findOne({id: ctx.request.body.shoppingList, sharedWith: ctx.state.user})
 
   if (!shoppingList) {
-    ctx.throw(400, "Unknown Cookbook");
+    ctx.throw(400, "Unknown shopping list");
   }
 
   return next();

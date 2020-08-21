@@ -34,8 +34,8 @@
       "type": "string"
     },
     "shoppingList": {
-      "model": "shoppinglist",
-      "via": "shoppingListItems"
+      "via": "shoppingListItems",
+      "model": "shoppinglist"
     }
   }
 }
