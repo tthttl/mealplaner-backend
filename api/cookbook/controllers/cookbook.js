@@ -13,14 +13,14 @@ const sanitizeCookbook = ({id, title}) => {
 module.exports = {
   async find(ctx) {
 
-    const user = ctx.query.user;
+    const targetUser = ctx.query.user;
     delete ctx.query.user;
 
-   const entitiesOwner = strapi.services.cookbook.find({...ctx.query, owner: user});
-   const entitiesShared = strapi.services.cookbook.find({...ctx.query, sharedWith: user});
-   const entities = await Promise.all([entitiesOwner, entitiesShared])
+   const ownCookbooksPromise = strapi.services.cookbook.find({...ctx.query, owner: targetUser});
+   const sharedCookbooksPromise = strapi.services.cookbook.find({...ctx.query, sharedWith: targetUser});
+   const [ownCookbooks, sharedCookbooks] = await Promise.all([ownCookbooksPromise, sharedCookbooksPromise])
 
-    return [...entities[0], ...entities[1]]
+    return [...ownCookbooks, ...sharedCookbooks]
       .map(entity => sanitizeCookbook(entity))
   },
   async findOne(ctx) {

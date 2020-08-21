@@ -1,7 +1,7 @@
 const { sanitizeEntity } = require('strapi-utils');
 
-const sanitizeUser = user =>
-  sanitizeEntity(user, {
+const sanitizeUser = ({id, username, email, provider} ) =>
+  sanitizeEntity({id, username, email, provider} , {
     model: strapi.query('user', 'users-permissions').model,
   });
 
@@ -13,7 +13,6 @@ module.exports = {
       return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
     }
 
-    const {id, username, email, provider} = sanitizeUser(user);
-    ctx.body = {id, username, email, provider};
+    ctx.body = sanitizeUser(user);
   },
 }

@@ -8,7 +8,7 @@ module.exports = async (ctx, next) => {
     ctx.throw(400, "Please provide a title");
   }
 
-  if (!ctx.request.body.shoppinglist) {
+  if (!ctx.request.body.shoppingList) {
     ctx.throw(400, "Please provide a shoppingList");
   }
 

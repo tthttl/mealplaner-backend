@@ -13,14 +13,14 @@
       "type": "string"
     },
     "owner": {
+      "via": "cookbooks",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "cookbooks"
+      "model": "user"
     },
     "sharedWith": {
+      "via": "sharedCookbooks",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "sharedCookbooks",
       "dominant": true
     },
     "recipes": {

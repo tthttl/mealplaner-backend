@@ -9,8 +9,6 @@ module.exports = async (ctx, next) => {
     return ctx.notFound("Not Found")
   }
 
-  console.log(shoppingListItem.shoppinglist.id);
-
   const shoppingList =
     await strapi.services.shoppinglist.findOne({id: shoppingListItem.shoppinglist.id, owner: currentUser})
     || await strapi.services.shoppinglist.findOne({id: shoppingListItem.shoppinglist.id, sharedWith: currentUser})

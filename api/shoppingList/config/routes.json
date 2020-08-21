@@ -29,7 +29,7 @@
       "path": "/shoppinglists/:id",
       "handler": "shoppinglist.update",
       "config": {
-        "policies": ["global::isAuthenticated", "validateShoppingList"]
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "validateShoppingList"]
       }
     },
     {

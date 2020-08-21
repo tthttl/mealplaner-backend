@@ -33,7 +33,7 @@
     "title": {
       "type": "string"
     },
-    "shoppinglist": {
+    "shoppingList": {
       "model": "shoppinglist",
       "via": "shoppingListItems"
     }
