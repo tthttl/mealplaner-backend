@@ -8,7 +8,7 @@
 const {sanitizeEntity} = require('strapi-utils');
 
 const sanitizeShoppingList = ({id, title}) => {
-  return sanitizeEntity({id, title}, {model: strapi.models.shoppingList})
+  return sanitizeEntity({id, title}, {model: strapi.models.shoppinglist})
 }
 
 
@@ -18,11 +18,13 @@ module.exports = {
     const user = ctx.query.user;
     delete ctx.query.user;
 
-    const ownShoppingListPromise = strapi.services.shoppinglist.find({...ctx.query, owner: user});
-    const sharedShoppingListPromise = strapi.services.shoppinglist.find({...ctx.query, sharedWith: user});
-    const [ownShoppingList, sharedShoppingList] = await Promise.all([ownShoppingListPromise, sharedShoppingListPromise])
+    const ownShoppingListsPromise = strapi.services.shoppinglist.find({...ctx.query, owner: user});
+    const sharedShoppingListsPromise = strapi.services.shoppinglist.find({...ctx.query, sharedWith: user});
+    const [ownShoppingLists, sharedShoppingLists] = await Promise.all([ownShoppingListsPromise, sharedShoppingListsPromise])
 
-    return [...ownShoppingList, ...sharedShoppingList]
+
+
+    return [...ownShoppingLists, ...sharedShoppingLists]
       .map(entity => sanitizeShoppingList(entity))
   },
   async findOne(ctx) {
