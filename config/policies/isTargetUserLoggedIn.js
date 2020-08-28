@@ -5,9 +5,7 @@ module.exports = async (ctx, next) => {
     return ctx.unauthorized("Specify a target user equal to your own id ?user=${user.id}")
   }
 
-  const loggedInUserId = ctx.state.user.id;
-
-  if (loggedInUserId.toString() !== targetUserId.toString()) {
+  if (ctx.state.user.id.toString() !== targetUserId.toString()) {
     return ctx.unauthorized("Target user does not match logged in user");
   }
 

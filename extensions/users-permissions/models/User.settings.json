@@ -55,18 +55,18 @@
       "private": true
     },
     "cookbooks": {
-      "via": "owner",
-      "collection": "cookbook"
+      "collection": "cookbook",
+      "via": "owner"
     },
     "sharedCookbooks": {
-      "via": "sharedWith",
-      "collection": "cookbook"
+      "collection": "cookbook",
+      "via": "sharedWith"
     },
-    "shoppinglists": {
+    "shoppingLists": {
       "via": "owner",
       "collection": "shoppinglist"
     },
-    "sharedShoppinglists": {
+    "sharedShoppingLists": {
       "via": "sharedWith",
       "collection": "shoppinglist"
     }

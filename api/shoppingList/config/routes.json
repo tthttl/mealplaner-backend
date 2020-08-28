@@ -2,40 +2,40 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/shoppinglists",
-      "handler": "shoppinglist.find",
+      "path": "/shopping-lists",
+      "handler": "shoppingList.find",
       "config": {
         "policies": ["global::isAuthenticated", "global::isTargetUserLoggedIn"]
       }
     },
     {
       "method": "GET",
-      "path": "/shoppinglists/:id",
-      "handler": "shoppinglist.findOne",
+      "path": "/shopping-lists/:id",
+      "handler": "shoppingList.findOne",
       "config": {
         "policies": ["global::isAuthenticated", "isCurrentUserAllowedToAccessShoppinglist"]
       }
     },
     {
       "method": "POST",
-      "path": "/shoppinglists",
-      "handler": "shoppinglist.create",
+      "path": "/shopping-lists",
+      "handler": "shoppingList.create",
       "config": {
         "policies": ["global::isAuthenticated", "validateShoppingList"]
       }
     },
     {
       "method": "PUT",
-      "path": "/shoppinglists/:id",
-      "handler": "shoppinglist.update",
+      "path": "/shopping-lists/:id",
+      "handler": "shoppingList.update",
       "config": {
-        "policies": ["global::isAuthenticated", "validateShoppingList"]
+        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "validateShoppingList"]
       }
     },
     {
       "method": "DELETE",
-      "path": "/shoppinglists/:id",
-      "handler": "shoppinglist.delete",
+      "path": "/shopping-lists/:id",
+      "handler": "shoppingList.delete",
       "config": {
         "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "isNotLastShoppingListOfOwner"]
       }

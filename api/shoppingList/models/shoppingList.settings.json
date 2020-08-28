@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "shoppinglists",
+  "collectionName": "shoppingLists",
   "info": {
-    "name": "shoppinglist"
+    "name": "shoppingList"
   },
   "options": {
     "increments": true,
@@ -12,20 +12,20 @@
     "title": {
       "type": "string"
     },
+    "shoppingListItems": {
+      "collection": "shopping-list-item",
+      "via": "shoppingList"
+    },
     "owner": {
       "plugin": "users-permissions",
       "model": "user",
-      "via": "shoppinglists"
+      "via": "shoppingLists"
     },
     "sharedWith": {
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "sharedShoppinglists",
+      "via": "sharedShoppingLists",
       "dominant": true
-    },
-    "shoppingListItems": {
-      "via": "shoppinglist",
-      "collection": "shopping-list-item"
     }
   }
 }

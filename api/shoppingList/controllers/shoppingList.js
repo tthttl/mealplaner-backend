@@ -18,11 +18,11 @@ module.exports = {
     const user = ctx.query.user;
     delete ctx.query.user;
 
-    const entitiesOwner = strapi.services.shoppinglist.find({...ctx.query, owner: user});
-    const entitiesShared = strapi.services.shoppinglist.find({...ctx.query, sharedWith: user});
-    const entities = await Promise.all([entitiesOwner, entitiesShared])
+    const ownShoppingListsPromise = strapi.services.shoppinglist.find({...ctx.query, owner: user});
+    const sharedShoppingListsPromise = strapi.services.shoppinglist.find({...ctx.query, sharedWith: user});
+    const [ownShoppingLists, sharedShoppingLists] = await Promise.all([ownShoppingListsPromise, sharedShoppingListsPromise])
 
-    return [...entities[0], ...entities[1]]
+    return [...ownShoppingLists, ...sharedShoppingLists]
       .map(entity => sanitizeShoppingList(entity))
   },
   async findOne(ctx) {

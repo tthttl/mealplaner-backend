@@ -33,9 +33,9 @@
     "title": {
       "type": "string"
     },
-    "shoppinglist": {
-      "model": "shoppinglist",
-      "via": "shoppingListItems"
+    "shoppingList": {
+      "via": "shoppingListItems",
+      "model": "shoppinglist"
     }
   }
 }
