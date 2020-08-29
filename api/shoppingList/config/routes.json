@@ -21,7 +21,7 @@
       "path": "/shopping-lists",
       "handler": "shoppingList.create",
       "config": {
-        "policies": ["global::isAuthenticated", "validateShoppingList"]
+        "policies": ["global::isAuthenticated", "global::validateForJsonAndOwnerAndTitle"]
       }
     },
     {
@@ -29,7 +29,10 @@
       "path": "/shopping-lists/:id",
       "handler": "shoppingList.update",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "validateShoppingList"]
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserOwnerOfShoppingList",
+          "global::validateForJsonAndOwnerAndTitle"]
       }
     },
     {

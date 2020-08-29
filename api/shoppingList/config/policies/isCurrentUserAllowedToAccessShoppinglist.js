@@ -8,6 +8,7 @@ module.exports = async (ctx, next) => {
     ctx.throw(404, "Not Found")
   }
 
-  return [shoppingList.owner, ...shoppingList.sharedWith].some(allowedUser => strapi.config.functions.userHelpers.match(allowedUser, currentUser))
+  return [shoppingList.owner, ...shoppingList.sharedWith]
+    .some(allowedUser => strapi.config.functions.helpers.matchById(allowedUser, currentUser))
     ? next() : ctx.throw(404, "Not Found");
 }

@@ -15,7 +15,8 @@ module.exports = async (ctx, next) => {
     return ctx.send([]);
   }
 
-  return [targetCookbook.owner, ...targetCookbook.sharedWith].some(allowedUser => strapi.config.functions.userHelpers.match(allowedUser, ctx.state.user)) ?
+  return [targetCookbook.owner, ...targetCookbook.sharedWith]
+    .some(allowedUser => strapi.config.functions.helpers.matchById(allowedUser, ctx.state.user)) ?
     next() : ctx.send([]);
 }
 

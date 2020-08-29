@@ -1,0 +1,60 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/meals",
+      "handler": "meal.find",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "hasCurrentUserAccessToTargetMealplaner"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/meals/:id",
+      "handler": "meal.findOne",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "hasCurrentUserAccessToMealplanerOfMeal"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/meals",
+      "handler": "meal.create",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "validateMealInput"
+        ]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/meals/:id",
+      "handler": "meal.update",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "hasCurrentUserAccessToMealplanerOfMeal",
+          "validateMealInput"
+        ]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/meals/:id",
+      "handler": "meal.delete",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "hasCurrentUserAccessToMealplanerOfMeal"
+        ]
+      }
+    }
+  ]
+}

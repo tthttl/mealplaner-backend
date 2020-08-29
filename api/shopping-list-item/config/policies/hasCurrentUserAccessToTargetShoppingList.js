@@ -15,6 +15,7 @@ module.exports = async (ctx, next) => {
     return ctx.send([]);
   }
 
-  return [targetShoppingList.owner, ...targetShoppingList.sharedWith].some(allowedUser => strapi.config.functions.userHelpers.match(allowedUser, ctx.state.user)) ?
+  return [targetShoppingList.owner, ...targetShoppingList.sharedWith]
+    .some(allowedUser => strapi.config.functions.helpers.matchById(allowedUser, ctx.state.user)) ?
     next() : ctx.send([]);
 }

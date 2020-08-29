@@ -1,20 +1,10 @@
 'use strict';
 
+const {sanitizeRecipe} = require("../../../config/functions/helpers");
 /**
  * Read the documentation (https://strapi.io/documentation/v3.x/concepts/controllers.html#core-controllers)
  * to customize this controller
  */
-const {sanitizeEntity} = require('strapi-utils');
-
-const sanitizeRecipe = ({id, title, url, ingredients}) => {
-  return sanitizeEntity({
-    id,
-    title,
-    url,
-    ingredients: ingredients.map(({id, unit, amount, title}) => ({id, unit, amount, title}))
-  }, {model: strapi.models.recipe})
-}
-
 module.exports = {
   async find(ctx) {
     let entities;

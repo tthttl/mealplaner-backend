@@ -1,0 +1,61 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/mealplaners",
+      "handler": "mealplaner.find",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "global::isTargetUserLoggedIn"
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/mealplaners/:id",
+      "handler": "mealplaner.findOne",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserAllowedToAccessMealplaner"
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/mealplaners",
+      "handler": "mealplaner.create",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "global::validateForJsonAndOwnerAndTitle"
+        ]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/mealplaners/:id",
+      "handler": "mealplaner.update",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "global::validateForJsonAndOwnerAndTitle",
+          "isCurrentUserOwnerOfMealplaner"
+        ]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/mealplaners/:id",
+      "handler": "mealplaner.delete",
+      "config": {
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserOwnerOfMealplaner",
+          "isNotLastMealplanerOfOwner"
+        ]
+      }
+    }
+  ]
+}
