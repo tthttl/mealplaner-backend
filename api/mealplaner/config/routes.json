@@ -29,7 +29,9 @@
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "global::validateForJsonAndOwnerAndTitle"
+          "global::isJson",
+          "global::hasTitle",
+          "global::isOwnerSpecified"
         ]
       }
     },
@@ -40,7 +42,9 @@
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "global::validateForJsonAndOwnerAndTitle",
+          "global::isJson",
+          "global::hasTitle",
+          "global::isOwnerSpecified",
           "isCurrentUserOwnerOfMealplaner"
         ]
       }

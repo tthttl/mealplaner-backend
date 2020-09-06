@@ -13,7 +13,7 @@ module.exports = async (ctx, next) => {
     || await strapi.services.mealplaner.findOne({id: meal.mealplaner.id, sharedWith: currentUser})
 
   if(!mealplaner) {
-    return ctx.throw(400, "Meal is not in any of the mealplaners available to the user");
+    return ctx.throw(404, "Meal not Found");
   }
 
   return next();

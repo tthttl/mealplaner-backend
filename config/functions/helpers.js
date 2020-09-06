@@ -8,7 +8,7 @@ module.exports = {
 
     return entity1.id.toString() === entity2.id.toString();
   },
-  mapEntityToIdAndTitle: (entity) => {
+  sanitizeToTitleAndId: (entity) => {
     return {
       id: entity.id,
       title: entity.title

@@ -5,7 +5,10 @@
       "path": "/cookbooks",
       "handler": "cookbook.find",
       "config": {
-        "policies": ["global::isAuthenticated", "global::isTargetUserLoggedIn"]
+        "policies": [
+          "global::isAuthenticated",
+          "global::isTargetUserLoggedIn"
+        ]
       }
     },
     {
@@ -13,7 +16,10 @@
       "path": "/cookbooks/:id",
       "handler": "cookbook.findOne",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserAllowedToAccessCookbook"]
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserAllowedToAccessCookbook"
+        ]
       }
     },
     {
@@ -21,7 +27,12 @@
       "path": "/cookbooks",
       "handler": "cookbook.create",
       "config": {
-        "policies": ["global::isAuthenticated", "global::validateForJsonAndOwnerAndTitle"]
+        "policies": [
+          "global::isAuthenticated",
+          "global::isJson",
+          "global::hasTitle",
+          "global::isOwnerSpecified"
+        ]
       }
     },
     {
@@ -32,7 +43,9 @@
         "policies": [
           "global::isAuthenticated",
           "isCurrentUserOwnerOfCookbook",
-          "global::validateForJsonAndOwnerAndTitle"
+          "global::isJson",
+          "global::hasTitle",
+          "global::isOwnerSpecified"
         ]
       }
     },
@@ -41,7 +54,11 @@
       "path": "/cookbooks/:id",
       "handler": "cookbook.delete",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfCookbook", "isNotLastCookbookOfOwner"]
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserOwnerOfCookbook",
+          "isNotLastCookbookOfOwner"
+        ]
       }
     }
   ]

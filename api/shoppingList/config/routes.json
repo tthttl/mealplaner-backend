@@ -5,7 +5,10 @@
       "path": "/shopping-lists",
       "handler": "shoppingList.find",
       "config": {
-        "policies": ["global::isAuthenticated", "global::isTargetUserLoggedIn"]
+        "policies": [
+          "global::isAuthenticated",
+          "global::isTargetUserLoggedIn"
+        ]
       }
     },
     {
@@ -13,7 +16,10 @@
       "path": "/shopping-lists/:id",
       "handler": "shoppingList.findOne",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserAllowedToAccessShoppinglist"]
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserAllowedToAccessShoppinglist"
+        ]
       }
     },
     {
@@ -21,7 +27,12 @@
       "path": "/shopping-lists",
       "handler": "shoppingList.create",
       "config": {
-        "policies": ["global::isAuthenticated", "global::validateForJsonAndOwnerAndTitle"]
+        "policies": [
+          "global::isAuthenticated",
+          "global::isJson",
+          "global::hasTitle",
+          "global::isOwnerSpecified"
+        ]
       }
     },
     {
@@ -32,7 +43,10 @@
         "policies": [
           "global::isAuthenticated",
           "isCurrentUserOwnerOfShoppingList",
-          "global::validateForJsonAndOwnerAndTitle"]
+          "global::isJson",
+          "global::hasTitle",
+          "global::isOwnerSpecified"
+        ]
       }
     },
     {
@@ -40,7 +54,11 @@
       "path": "/shopping-lists/:id",
       "handler": "shoppingList.delete",
       "config": {
-        "policies": ["global::isAuthenticated", "isCurrentUserOwnerOfShoppingList", "isNotLastShoppingListOfOwner"]
+        "policies": [
+          "global::isAuthenticated",
+          "isCurrentUserOwnerOfShoppingList",
+          "isNotLastShoppingListOfOwner"
+        ]
       }
     }
   ]

@@ -16,19 +16,19 @@ module.exports = {
    const [ownCookbooks, sharedCookbooks] = await Promise.all([ownCookbooksPromise, sharedCookbooksPromise])
 
     return [...ownCookbooks, ...sharedCookbooks]
-      .map(entity => strapi.config.functions.helpers.mapEntityToIdAndTitle(entity))
+      .map(entity => strapi.config.functions.helpers.sanitizeToTitleAndId(entity))
   },
   async findOne(ctx) {
     const entity = await strapi.services.cookbook.findOne({id: ctx.params.id});
-    return strapi.config.functions.helpers.mapEntityToIdAndTitle(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async create(ctx) {
     const entity = await strapi.services.cookbook.create({...ctx.request.body, owner: ctx.state.user, sharedWith: []});
-    return strapi.config.functions.helpers.mapEntityToIdAndTitle(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async update(ctx) {
     const entity = await strapi.services.cookbook.update({ id:  ctx.params.id }, {...ctx.request.body, owner: ctx.state.user});
-    return strapi.config.functions.helpers.mapEntityToIdAndTitle(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async delete(ctx) {
     await strapi.services.cookbook.delete({ id: ctx.params.id });
