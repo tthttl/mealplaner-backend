@@ -68,6 +68,34 @@
           "actionType": "destroy"
         }
       }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/refresh-token",
+      "handler": "Auth.refreshToken",
+      "config": {
+        "policies": ["plugins::users-permissions.ratelimit"],
+        "prefix": "",
+        "description": "Refresh the jwt token",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auth/logout",
+      "handler": "Auth.logout",
+      "config": {
+        "policies": ["plugins::users-permissions.ratelimit"],
+        "prefix": "",
+        "description": "Reset the refresh token cookie",
+        "tag": {
+          "plugin": "users-permissions",
+          "name": "User"
+        }
+      }
     }
   ]
 }
