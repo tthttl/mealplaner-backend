@@ -21,7 +21,11 @@
       "path": "/shopping-list-items",
       "handler": "shopping-list-item.create",
       "config": {
-        "policies": ["global::isAuthenticated", "validateShoppingListItem"]
+        "policies": [
+          "global::isAuthenticated",
+          "global::isJson",
+          "validateShoppingListItem"
+        ]
       }
     },
     {
@@ -29,7 +33,11 @@
       "path": "/shopping-list-items/:id",
       "handler": "shopping-list-item.update",
       "config": {
-        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToShoppingListItemShoppingList" ,"validateShoppingListItem"]
+        "policies": [
+          "global::isAuthenticated",
+          "hasCurrentUserAccessToShoppingListItemShoppingList",
+          "global::isJson",
+          "validateShoppingListItem"]
       }
     },
     {

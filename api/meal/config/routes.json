@@ -29,6 +29,7 @@
       "config": {
         "policies": [
           "global::isAuthenticated",
+          "global::isJson",
           "validateMealInput"
         ]
       }
@@ -41,6 +42,7 @@
         "policies": [
           "global::isAuthenticated",
           "hasCurrentUserAccessToMealplanerOfMeal",
+          "global::isJson",
           "validateMealInput"
         ]
       }
