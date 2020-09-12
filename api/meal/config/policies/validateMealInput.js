@@ -4,10 +4,6 @@ const addDays = require('date-fns/addDays')
 
 module.exports = async (ctx, next) => {
 
-  if (ctx.is('multipart')) {
-    ctx.throw(400, "Make only  JSON requests")
-  }
-
   if (!ctx.request.body.mealplaner) {
     ctx.throw(400, "Please provide a mealplaner");
   }
