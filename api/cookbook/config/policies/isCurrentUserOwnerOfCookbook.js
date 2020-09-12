@@ -8,5 +8,6 @@ module.exports = async (ctx, next) => {
     ctx.throw(404, "Not Found")
   }
 
-  return strapi.config.functions.userHelpers.match(cookBook.owner, currentUser) ? next() : ctx.throw(404, "Not Found");
+  return strapi.config.functions.helpers
+    .matchById(cookBook.owner, currentUser) ? next() : ctx.throw(404, "Not Found");
 }

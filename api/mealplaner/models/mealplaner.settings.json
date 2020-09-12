@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mealplaners",
+  "info": {
+    "name": "Mealplaner"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "owner": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "mealplaners"
+    },
+    "sharedWith": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "sharedMealplaners",
+      "dominant": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "meals": {
+      "collection": "meal",
+      "via": "mealplaner"
+    }
+  }
+}

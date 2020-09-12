@@ -2,62 +2,59 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/cookbooks",
-      "handler": "cookbook.find",
+      "path": "/meals",
+      "handler": "meal.find",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "global::isTargetUserLoggedIn"
+          "hasCurrentUserAccessToTargetMealplaner"
         ]
       }
     },
     {
       "method": "GET",
-      "path": "/cookbooks/:id",
-      "handler": "cookbook.findOne",
+      "path": "/meals/:id",
+      "handler": "meal.findOne",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "isCurrentUserAllowedToAccessCookbook"
+          "hasCurrentUserAccessToMealplanerOfMeal"
         ]
       }
     },
     {
       "method": "POST",
-      "path": "/cookbooks",
-      "handler": "cookbook.create",
+      "path": "/meals",
+      "handler": "meal.create",
       "config": {
         "policies": [
           "global::isAuthenticated",
           "global::isJson",
-          "global::hasTitle",
-          "global::isOwnerSpecified"
+          "validateMealInput"
         ]
       }
     },
     {
       "method": "PUT",
-      "path": "/cookbooks/:id",
-      "handler": "cookbook.update",
+      "path": "/meals/:id",
+      "handler": "meal.update",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "isCurrentUserOwnerOfCookbook",
+          "hasCurrentUserAccessToMealplanerOfMeal",
           "global::isJson",
-          "global::hasTitle",
-          "global::isOwnerSpecified"
+          "validateMealInput"
         ]
       }
     },
     {
       "method": "DELETE",
-      "path": "/cookbooks/:id",
-      "handler": "cookbook.delete",
+      "path": "/meals/:id",
+      "handler": "meal.delete",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "isCurrentUserOwnerOfCookbook",
-          "isNotLastCookbookOfOwner"
+          "hasCurrentUserAccessToMealplanerOfMeal"
         ]
       }
     }

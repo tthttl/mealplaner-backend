@@ -21,7 +21,10 @@
       "path": "/recipes",
       "handler": "recipe.create",
       "config": {
-        "policies": ["global::isAuthenticated", "validateRecipeInput"]
+        "policies": [
+          "global::isAuthenticated",
+          "global::isJson",
+          "validateRecipeInput"]
       }
     },
     {
@@ -29,7 +32,11 @@
       "path": "/recipes/:id",
       "handler": "recipe.update",
       "config": {
-        "policies": ["global::isAuthenticated", "hasCurrentUserAccessToRecipesCookbook", "validateRecipeInput"]
+        "policies": [
+          "global::isAuthenticated",
+          "hasCurrentUserAccessToRecipesCookbook",
+          "global::isJson",
+          "validateRecipeInput"]
       }
     },
     {

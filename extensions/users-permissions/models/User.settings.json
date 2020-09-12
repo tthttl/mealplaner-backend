@@ -69,6 +69,14 @@
     "sharedShoppingLists": {
       "via": "sharedWith",
       "collection": "shoppinglist"
+    },
+    "mealplaners": {
+      "via": "owner",
+      "collection": "mealplaner"
+    },
+    "sharedMealplaners": {
+      "via": "sharedWith",
+      "collection": "mealplaner"
     }
   }
 }

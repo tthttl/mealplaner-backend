@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "meals",
+  "info": {
+    "name": "Meal"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "recipe": {
+      "model": "recipe"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "breakfast",
+        "lunch",
+        "dinner",
+        "morningSnack",
+        "afternoonSnack"
+      ]
+    },
+    "date": {
+      "type": "date"
+    },
+    "mealplaner": {
+      "via": "meals",
+      "model": "mealplaner"
+    }
+  }
+}

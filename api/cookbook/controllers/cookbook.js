@@ -4,11 +4,6 @@
  * Read the documentation (https://strapi.io/documentation/v3.x/concepts/controllers.html#core-controllers)
  * to customize this controller
  */
-const {sanitizeEntity} = require('strapi-utils');
-
-const sanitizeCookbook = ({id, title}) => {
-  return sanitizeEntity({id, title}, {model: strapi.models.cookbook})
-}
 
 module.exports = {
   async find(ctx) {
@@ -21,19 +16,19 @@ module.exports = {
    const [ownCookbooks, sharedCookbooks] = await Promise.all([ownCookbooksPromise, sharedCookbooksPromise])
 
     return [...ownCookbooks, ...sharedCookbooks]
-      .map(entity => sanitizeCookbook(entity))
+      .map(entity => strapi.config.functions.helpers.sanitizeToTitleAndId(entity))
   },
   async findOne(ctx) {
     const entity = await strapi.services.cookbook.findOne({id: ctx.params.id});
-    return sanitizeCookbook(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async create(ctx) {
     const entity = await strapi.services.cookbook.create({...ctx.request.body, owner: ctx.state.user, sharedWith: []});
-    return sanitizeCookbook(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async update(ctx) {
     const entity = await strapi.services.cookbook.update({ id:  ctx.params.id }, {...ctx.request.body, owner: ctx.state.user});
-    return sanitizeCookbook(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async delete(ctx) {
     await strapi.services.cookbook.delete({ id: ctx.params.id });

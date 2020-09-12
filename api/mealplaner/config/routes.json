@@ -2,8 +2,8 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/cookbooks",
-      "handler": "cookbook.find",
+      "path": "/mealplaners",
+      "handler": "mealplaner.find",
       "config": {
         "policies": [
           "global::isAuthenticated",
@@ -13,19 +13,19 @@
     },
     {
       "method": "GET",
-      "path": "/cookbooks/:id",
-      "handler": "cookbook.findOne",
+      "path": "/mealplaners/:id",
+      "handler": "mealplaner.findOne",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "isCurrentUserAllowedToAccessCookbook"
+          "isCurrentUserAllowedToAccessMealplaner"
         ]
       }
     },
     {
       "method": "POST",
-      "path": "/cookbooks",
-      "handler": "cookbook.create",
+      "path": "/mealplaners",
+      "handler": "mealplaner.create",
       "config": {
         "policies": [
           "global::isAuthenticated",
@@ -37,27 +37,27 @@
     },
     {
       "method": "PUT",
-      "path": "/cookbooks/:id",
-      "handler": "cookbook.update",
+      "path": "/mealplaners/:id",
+      "handler": "mealplaner.update",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "isCurrentUserOwnerOfCookbook",
           "global::isJson",
           "global::hasTitle",
-          "global::isOwnerSpecified"
+          "global::isOwnerSpecified",
+          "isCurrentUserOwnerOfMealplaner"
         ]
       }
     },
     {
       "method": "DELETE",
-      "path": "/cookbooks/:id",
-      "handler": "cookbook.delete",
+      "path": "/mealplaners/:id",
+      "handler": "mealplaner.delete",
       "config": {
         "policies": [
           "global::isAuthenticated",
-          "isCurrentUserOwnerOfCookbook",
-          "isNotLastCookbookOfOwner"
+          "isCurrentUserOwnerOfMealplaner",
+          "isNotLastMealplanerOfOwner"
         ]
       }
     }

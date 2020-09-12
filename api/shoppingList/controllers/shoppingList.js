@@ -5,13 +5,6 @@
  * to customize this controller
  */
 
-const {sanitizeEntity} = require('strapi-utils');
-
-const sanitizeShoppingList = ({id, title}) => {
-  return sanitizeEntity({id, title}, {model: strapi.models.shoppinglist})
-}
-
-
 module.exports = {
   async find(ctx) {
 
@@ -23,19 +16,19 @@ module.exports = {
     const [ownShoppingLists, sharedShoppingLists] = await Promise.all([ownShoppingListsPromise, sharedShoppingListsPromise])
 
     return [...ownShoppingLists, ...sharedShoppingLists]
-      .map(entity => sanitizeShoppingList(entity))
+      .map(entity => strapi.config.functions.helpers.sanitizeToTitleAndId(entity))
   },
   async findOne(ctx) {
     const entity = await strapi.services.shoppinglist.findOne({id: ctx.params.id});
-    return sanitizeShoppingList(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async create(ctx) {
     const entity = await strapi.services.shoppinglist.create({...ctx.request.body, owner: ctx.state.user, sharedWith: []});
-    return sanitizeShoppingList(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async update(ctx) {
     const entity = await strapi.services.shoppinglist.update({ id:  ctx.params.id }, {...ctx.request.body, owner: ctx.state.user});
-    return sanitizeShoppingList(entity);
+    return strapi.config.functions.helpers.sanitizeToTitleAndId(entity);
   },
   async delete(ctx) {
     await strapi.services.shoppinglist.delete({ id: ctx.params.id });
