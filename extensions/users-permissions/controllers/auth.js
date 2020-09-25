@@ -204,13 +204,13 @@ module.exports = {
     try {
       refreshTokePayload = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET)
     } catch {
-      return ctx.send({ok: false, accessToken: ''})
+      return ctx.send({ok: false, user: null})
     }
 
     const user = await strapi.query('user', 'users-permissions').findOne({id: refreshTokePayload.userid});
 
     if(!user) {
-      return ctx.send({ok: false, accessToken: ''});
+      return ctx.send({ok: false, user: null});
     }
 
     ctx.cookies.set(
@@ -223,12 +223,12 @@ module.exports = {
     );
 
     ctx.send({
-      jwt: strapi.plugins['users-permissions'].services.jwt.issue({
-        id: user.id,
-      }),
-      user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
-        model: strapi.query('user', 'users-permissions').model,
-      }),
+      ok: true,
+      user: {
+        jwt: strapi.plugins['users-permissions'].services.jwt.issue({id: user.id,}),
+        name: user.username,
+        email: user.email,
+      }
     });
   },
 
