@@ -13,8 +13,8 @@
       "type": "string"
     },
     "shoppingListItems": {
-      "collection": "shopping-list-item",
-      "via": "shoppingList"
+      "via": "shoppingList",
+      "collection": "shopping-list-item"
     },
     "owner": {
       "plugin": "users-permissions",

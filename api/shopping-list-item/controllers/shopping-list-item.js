@@ -8,10 +8,11 @@
 const {sanitizeEntity} = require('strapi-utils');
 
 
-const sanitizeShoppingListItem = ({id, title, amount, unit}) => {
+const sanitizeShoppingListItem = ({id, title, order, amount, unit}) => {
   return sanitizeEntity({
     id,
     title,
+    order,
     amount,
     unit
   }, {model: strapi.models['shopping-list-item']})
@@ -22,9 +23,9 @@ module.exports = {
     let entities;
 
     if (ctx.query._q) {
-      entities = await strapi.services['shopping-list-item'].search({...ctx.query});
+      entities = await strapi.services['shopping-list-item'].search({...ctx.query, _sort: 'order:desc'});
     } else {
-      entities = await strapi.services['shopping-list-item'].find({...ctx.query});
+      entities = await strapi.services['shopping-list-item'].find({...ctx.query, _sort: 'order:desc'});
     }
     return entities
       .map(entity => sanitizeShoppingListItem(entity))
@@ -34,7 +35,9 @@ module.exports = {
     return sanitizeShoppingListItem(entity);
   },
   async create(ctx) {
-    const entity = await strapi.services['shopping-list-item'].create({...ctx.request.body});
+    const currentHighestRankedItem = await strapi.services['shopping-list-item'].findOne({shoppingList: ctx.request.body.shoppingList, _sort: 'order:desc'});
+    const order = currentHighestRankedItem ? currentHighestRankedItem.order + 1 : 0;
+    const entity = await strapi.services['shopping-list-item'].create({...ctx.request.body, order});
     return sanitizeShoppingListItem(entity);
   },
   async update(ctx) {
