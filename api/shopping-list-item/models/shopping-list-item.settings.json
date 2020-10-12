@@ -34,8 +34,11 @@
       "type": "string"
     },
     "shoppingList": {
-      "via": "shoppingListItems",
-      "model": "shoppinglist"
+      "model": "shoppinglist",
+      "via": "shoppingListItems"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }
