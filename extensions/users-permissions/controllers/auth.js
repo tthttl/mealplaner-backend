@@ -137,6 +137,7 @@ module.exports = {
           jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
           {
             path: '/auth/refresh-token',
+            domain: 'localhost',
             expires: addDays(new Date(), 7)
           }
         );
@@ -226,6 +227,7 @@ module.exports = {
       ok: true,
       user: {
         jwt: strapi.plugins['users-permissions'].services.jwt.issue({id: user.id,}),
+        id: user._id,
         name: user.username,
         email: user.email,
       }
