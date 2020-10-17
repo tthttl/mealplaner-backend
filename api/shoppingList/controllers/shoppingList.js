@@ -32,6 +32,6 @@ module.exports = {
   },
   async delete(ctx) {
     await strapi.services.shoppinglist.delete({ id: ctx.params.id });
-    return 'DELETED';
+    return {DELETED: true};
   },
 };

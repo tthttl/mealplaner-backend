@@ -8,11 +8,12 @@
 const {sanitizeEntity} = require('strapi-utils');
 
 
-const sanitizeShoppingListItem = ({id, title, order, amount, unit}) => {
+const sanitizeShoppingListItem = ({id, title, shoppingList, order, amount, unit}) => {
   return sanitizeEntity({
     id,
     title,
     order,
+    shoppingList: shoppingList.id,
     amount,
     unit
   }, {model: strapi.models['shopping-list-item']})
@@ -46,6 +47,6 @@ module.exports = {
   },
   async delete(ctx) {
     await strapi.services['shopping-list-item'].delete({ id: ctx.params.id });
-    return 'DELETED';
+    return {DELETED: true};
   },
 };

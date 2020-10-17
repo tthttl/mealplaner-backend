@@ -137,6 +137,7 @@ module.exports = {
           jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
           {
             path: '/auth/refresh-token',
+            domain: 'localhost',
             expires: addDays(new Date(), 7)
           }
         );
@@ -207,7 +208,11 @@ module.exports = {
       return ctx.send({ok: false, user: null})
     }
 
-    const user = await strapi.query('user', 'users-permissions').findOne({id: refreshTokePayload.userid});
+    console.log('token', refreshTokePayload.userId);
+
+    const user = await strapi.query('user', 'users-permissions').findOne({_id: refreshTokePayload.userId});
+
+    console.log('user', user._id);
 
     if(!user) {
       return ctx.send({ok: false, user: null});
@@ -215,7 +220,7 @@ module.exports = {
 
     ctx.cookies.set(
       'jrt',
-      jwt.sign({userid: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
+      jwt.sign({userId: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
       {
         path: '/auth/refresh-token',
         expires: addDays(new Date(), 7)
@@ -226,6 +231,7 @@ module.exports = {
       ok: true,
       user: {
         jwt: strapi.plugins['users-permissions'].services.jwt.issue({id: user.id,}),
+        id: user._id,
         name: user.username,
         email: user.email,
       }
