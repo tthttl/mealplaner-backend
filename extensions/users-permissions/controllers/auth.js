@@ -136,7 +136,7 @@ module.exports = {
           'jrt',
           jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
           {
-            path: process.env.COOKIE_PATH || '/auth/refresh-token',
+            // path: process.env.COOKIE_PATH || '/auth/refresh-token',
             domain: process.env.DOMAIN || 'localhost',
             expires: addDays(new Date(), 7)
           }
@@ -181,7 +181,7 @@ module.exports = {
         'jrt',
         jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
         {
-          path: process.env.COOKIE_PATH || '/auth/refresh-token',
+          // path : process.env.COOKIE_PATH || '/auth/refresh-token',
           domain: process.env.DOMAIN || 'localhost',
           expires: addDays(new Date(), 7)
         }
@@ -223,7 +223,7 @@ module.exports = {
       'jrt',
       jwt.sign({userId: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
       {
-        path: process.env.COOKIE_PATH || '/auth/refresh-token',
+        // path: process.env.COOKIE_PATH || '/auth/refresh-token',
         domain: process.env.DOMAIN || 'localhost',
         expires: addDays(new Date(), 7)
       }
@@ -243,7 +243,7 @@ module.exports = {
   async logout(ctx) {
     ctx.cookies.set('jrt', '', {
       domain: process.env.DOMAIN || 'localhost',
-      path: process.env.COOKIE_PATH || '/auth/refresh-token',
+      // path: process.env.COOKIE_PATH || '/auth/refresh-token',
     });
     ctx.send(true);
   },
