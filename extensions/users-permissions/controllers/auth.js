@@ -137,6 +137,7 @@ module.exports = {
           jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
           {
             path: '/auth/refresh-token',
+            domain: process.env.domain || 'localhost',
             expires: addDays(new Date(), 7)
           }
         );
@@ -181,6 +182,7 @@ module.exports = {
         jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
         {
           path: '/auth/refresh-token',
+          domain: process.env.domain || 'localhost',
           expires: addDays(new Date(), 7)
         }
       );
