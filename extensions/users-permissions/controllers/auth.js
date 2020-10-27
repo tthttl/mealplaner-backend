@@ -224,7 +224,7 @@ module.exports = {
       jwt.sign({userId: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
       {
         path: '/auth/refresh-token',
-        domain: process.env.domain || 'localhost',
+        domain: process.env.DOMAIN || 'localhost',
         expires: addDays(new Date(), 7)
       }
     );
