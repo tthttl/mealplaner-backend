@@ -137,7 +137,7 @@ module.exports = {
           jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
           {
             path: '/auth/refresh-token',
-            domain: process.env.domain || 'localhost',
+            domain: process.env.DOMAIN || 'localhost',
             expires: addDays(new Date(), 7)
           }
         );
@@ -182,7 +182,7 @@ module.exports = {
         jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
         {
           path: '/auth/refresh-token',
-          domain: process.env.domain || 'localhost',
+          domain: process.env.DOMAIN || 'localhost',
           expires: addDays(new Date(), 7)
         }
       );
@@ -242,7 +242,7 @@ module.exports = {
 
   async logout(ctx) {
     ctx.cookies.set('jrt', '', {
-      domain: process.env.domain || 'localhost',
+      domain: process.env.DOMAIN || 'localhost',
       path: '/auth/refresh-token',
     });
     ctx.send(true);
