@@ -206,36 +206,45 @@ module.exports = {
     try {
       refreshTokePayload = jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET)
     } catch {
-      return ctx.send({ok: false, accessToken: ''})
+      return ctx.send({ok: false, user: null})
     }
 
-    const user = await strapi.query('user', 'users-permissions').findOne({id: refreshTokePayload.userid});
+    console.log('token', refreshTokePayload.userId);
+
+    const user = await strapi.query('user', 'users-permissions').findOne({_id: refreshTokePayload.userId});
+
+    console.log('user', user._id);
 
     if(!user) {
-      return ctx.send({ok: false, accessToken: ''});
+      return ctx.send({ok: false, user: null});
     }
 
     ctx.cookies.set(
       'jrt',
-      jwt.sign({userid: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
+      jwt.sign({userId: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
       {
         path: '/auth/refresh-token',
+        domain: process.env.domain || 'localhost',
         expires: addDays(new Date(), 7)
       }
     );
 
     ctx.send({
-      jwt: strapi.plugins['users-permissions'].services.jwt.issue({
-        id: user.id,
-      }),
-      user: sanitizeEntity(user.toJSON ? user.toJSON() : user, {
-        model: strapi.query('user', 'users-permissions').model,
-      }),
+      ok: true,
+      user: {
+        jwt: strapi.plugins['users-permissions'].services.jwt.issue({id: user.id,}),
+        id: user._id,
+        name: user.username,
+        email: user.email,
+      }
     });
   },
 
   async logout(ctx) {
-    ctx.cookies.set('jrt', '', {path: '/auth/refresh-token',});
+    ctx.cookies.set('jrt', '', {
+      domain: process.env.domain || 'localhost',
+      path: '/auth/refresh-token',
+    });
     ctx.send(true);
   },
 };

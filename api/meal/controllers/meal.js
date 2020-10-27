@@ -42,6 +42,6 @@ module.exports = {
   },
   async delete(ctx) {
     await strapi.services.meal.delete({ id: ctx.params.id });
-    return 'DELETED';
+    return {DELETED: true};
   },
 };

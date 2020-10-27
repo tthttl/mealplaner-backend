@@ -14,12 +14,13 @@ module.exports = {
       title: entity.title
     }
   },
-  sanitizeRecipe: ({id, title, url, ingredients}) => {
+  sanitizeRecipe: ({id, title, url, ingredients, cookbook}) => {
     return sanitizeEntity({
       id,
       title,
       url,
-      ingredients: ingredients.map(({id, unit, amount, title}) => ({id, unit, amount, title}))
+      cookbookId: cookbook.id,
+      ingredients: ingredients.map(({id, unit, amount, title, isStapleFood}) => ({id, unit, amount, title, isStapleFood}))
     }, {model: strapi.models.recipe})
   }
 }
