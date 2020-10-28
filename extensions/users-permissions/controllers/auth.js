@@ -137,7 +137,7 @@ module.exports = {
           jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
           {
             // path: process.env.COOKIE_PATH || '/auth/refresh-token',
-            hostOnly: false,
+            httpOnly: false,
             domain: process.env.DOMAIN || 'localhost',
             expires: addDays(new Date(), 7)
           }
@@ -183,7 +183,7 @@ module.exports = {
         jwt.sign({userId: user.id},  process.env.JWT_REFRESH_TOKEN_SECRET),
         {
           // path : process.env.COOKIE_PATH || '/auth/refresh-token',
-          hostOnly: false,
+          httpOnly: false,
           domain: process.env.DOMAIN || 'localhost',
           expires: addDays(new Date(), 7)
         }
@@ -226,7 +226,7 @@ module.exports = {
       jwt.sign({userId: user.id}, process.env.JWT_REFRESH_TOKEN_SECRET),
       {
         // path: process.env.COOKIE_PATH || '/auth/refresh-token',
-        hostOnly: false,
+        httpOnly: false,
         domain: process.env.DOMAIN || 'localhost',
         expires: addDays(new Date(), 7)
       }
