@@ -63,20 +63,23 @@
       "via": "sharedWith"
     },
     "shoppingLists": {
-      "via": "owner",
-      "collection": "shoppinglist"
+      "collection": "shoppinglist",
+      "via": "owner"
     },
     "sharedShoppingLists": {
-      "via": "sharedWith",
-      "collection": "shoppinglist"
+      "collection": "shoppinglist",
+      "via": "sharedWith"
     },
     "mealplaners": {
-      "via": "owner",
-      "collection": "mealplaner"
+      "collection": "mealplaner",
+      "via": "owner"
     },
     "sharedMealplaners": {
-      "via": "sharedWith",
-      "collection": "mealplaner"
+      "collection": "mealplaner",
+      "via": "sharedWith"
+    },
+    "name": {
+      "type": "string"
     }
   }
 }
