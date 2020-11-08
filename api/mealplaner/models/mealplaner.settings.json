@@ -10,14 +10,14 @@
   },
   "attributes": {
     "owner": {
+      "via": "mealplaners",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "mealplaners"
+      "model": "user"
     },
     "sharedWith": {
+      "via": "sharedMealplaners",
       "plugin": "users-permissions",
       "collection": "user",
-      "via": "sharedMealplaners",
       "dominant": true
     },
     "title": {
