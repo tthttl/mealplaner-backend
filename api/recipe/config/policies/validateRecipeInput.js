@@ -25,7 +25,7 @@ module.exports = async (ctx, next) => {
       ctx.throw(400, "Please provide an unit for each ingredient");
     }
 
-    if (!["kg", "g", "tableSpoon", "coffeeSpoon", "l", "dl", "ml", "pinch", "piece"].includes(ingredient.unit)) {
+    if (!["kg", "g", "tableSpoon", "coffeeSpoon", "l", "dl", "ml", "pinch", "piece", "pack"].includes(ingredient.unit)) {
       ctx.throw(400, "Specified unit does not exist");
     }
 
