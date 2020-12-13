@@ -59,7 +59,7 @@
       "path": "/users/:id",
       "handler": "User.destroy",
       "config": {
-        "policies": ["global::alwaysFail"],
+        "policies": [],
         "prefix": "",
         "description": "Delete an existing user",
         "tag": {

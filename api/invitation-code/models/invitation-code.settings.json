@@ -1,0 +1,16 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invitation_codes",
+  "info": {
+    "name": "invitationCode"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "code": {
+      "type": "string"
+    }
+  }
+}
