@@ -233,7 +233,7 @@ module.exports = {
       user: {
         jwt: strapi.plugins['users-permissions'].services.jwt.issue({id: user.id,}),
         id: user._id,
-        name: user.username,
+        name: user.name,
         email: user.email,
       }
     });
